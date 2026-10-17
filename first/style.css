@@ -28,44 +28,109 @@ body {
     margin: 0;
     padding: 40px 20px;
     overflow-x: hidden;
-    cursor: none; /* Disables classic browser mouse arrow */
+    cursor: none;
+    position: relative;
 }
 
 a, button, input, label, [id^="btn-"], .task-card {
     cursor: none !important;
 }
 
+.birthday-photo-collage {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.portrait-card {
+    width: 120px;
+    height: 150px;
+    background: #fffaf8;
+    border: 3px solid var(--border-line);
+    border-radius: 20px;
+    box-shadow: 5px 5px 0 var(--border-line);
+    padding: 8px;
+    transform: rotate(-4deg);
+    overflow: hidden;
+}
+
+.portrait-card.portrait-right {
+    transform: rotate(6deg) translateX(8px);
+}
+
+.portrait-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 14px;
+    display: block;
+}
+
+body::before,
+body::after {
+    content: '✨';
+    position: fixed;
+    font-size: 24px;
+    z-index: 0;
+    opacity: 0.8;
+}
+
+body::before {
+    top: 80px;
+    right: 90px;
+}
+
+body::after {
+    bottom: 110px;
+    left: 140px;
+}
+
 /* --- 2. THE CUSTOM LAUFEY MOUSE POINTER --- */
 #laufey-cursor-container {
-    width: 32px;
-    height: 32px;
-    background: #E8D7FF;
+    width: 52px;
+    height: 52px;
+    background-image: url("../The%20Pomeranian!!%20by%20hokahoka%20%233884825.jpg");
+    background-size: cover;
+    background-position: center;
     border: 3px solid var(--border-line);
-    border-radius: 50% 50% 45% 45%;
+    border-radius: 18px;
     position: fixed;
     pointer-events: none;
     z-index: 9999;
-    transform: translate(-50%, -50%);
-    box-shadow: 3px 3px 0px var(--border-line);
+    transform: translate(-50%, -50%) rotate(-8deg);
+    box-shadow: 4px 4px 0px var(--border-line);
     left: -50px;
     top: -50px;
+    overflow: hidden;
 }
 #laufey-cursor-container::before {
-    content: '🎵';
-    font-size: 9px;
+    content: '✨';
+    font-size: 16px;
     position: absolute;
-    top: -12px;
-    right: -6px;
+    top: -8px;
+    right: -3px;
+    background: rgba(255,255,255,0.7);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 2px solid var(--border-line);
 }
 #laufey-cursor-container::after {
-    content: '• •';
+    content: '♥';
     font-size: 12px;
-    font-weight: bold;
-    color: var(--border-line);
+    color: #ff6b8d;
     position: absolute;
-    top: 4px;
-    left: 7px;
-    letter-spacing: 2px;
+    bottom: 5px;
+    left: 6px;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.15);
 }
 
 /* --- 3. MAIN WINDOW INTERFACE DASHBOARD --- */
@@ -142,11 +207,13 @@ hr {
 }
 
 #album-art-placeholder {
-    width: 90px !important;
-    height: 90px !important;
-    background: repeating-radial-gradient(circle, #2B2525, #2B2525 4px, #3A3333 5px, #3A3333 8px);
+    width: 120px !important;
+    height: 120px !important;
+    background-image: url("../beabadoobee.jpg");
+    background-size: cover;
+    background-position: center;
     margin: 0 auto 15px auto;
-    border-radius: 50% !important;
+    border-radius: 24px !important;
     border: 4px solid var(--border-line) !important;
     box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
     display: flex;
@@ -155,20 +222,37 @@ hr {
     position: relative;
     animation: recordSpin 4s linear infinite;
     animation-play-state: paused;
+    overflow: visible;
 }
 
 #album-art-placeholder::after {
-    content: '📀';
-    font-size: 22px;
+    content: '';
     position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    background: var(--pastel-pink);
-    border: 2px solid var(--border-line);
+    inset: 8px;
+    border-radius: 18px;
+    border: 2px solid rgba(255,255,255,0.65);
+}
+
+.album-cat-badge {
+    position: absolute;
+    right: -12px;
+    bottom: -10px;
+    width: 42px;
+    height: 42px;
+    border: 3px solid var(--border-line);
     border-radius: 50%;
+    background: #fffaf8;
+    box-shadow: 3px 3px 0 var(--border-line);
+    padding: 2px;
+    z-index: 2;
+}
+
+.album-cat-badge img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
 }
 
 @keyframes recordSpin { 100% { transform: rotate(360deg); } }
@@ -490,11 +574,13 @@ hr {
 }
 
 #album-art-placeholder {
-    width: 90px !important;
-    height: 90px !important;
-    background: repeating-radial-gradient(circle, #2B2525, #2B2525 4px, #3A3333 5px, #3A3333 8px);
+    width: 120px !important;
+    height: 120px !important;
+    background-image: url("../beabadoobee.jpg");
+    background-size: cover;
+    background-position: center;
     margin: 0 auto 15px auto;
-    border-radius: 50% !important;
+    border-radius: 24px !important;
     border: 4px solid var(--border-line) !important;
     box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
     display: flex;
@@ -503,20 +589,37 @@ hr {
     position: relative;
     animation: recordSpin 4s linear infinite;
     animation-play-state: paused;
+    overflow: visible;
 }
 
 #album-art-placeholder::after {
-    content: '📀';
-    font-size: 22px;
+    content: '';
     position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    background: var(--pastel-pink);
-    border: 2px solid var(--border-line);
+    inset: 8px;
+    border-radius: 18px;
+    border: 2px solid rgba(255,255,255,0.65);
+}
+
+.album-cat-badge {
+    position: absolute;
+    right: -12px;
+    bottom: -10px;
+    width: 42px;
+    height: 42px;
+    border: 3px solid var(--border-line);
     border-radius: 50%;
+    background: #fffaf8;
+    box-shadow: 3px 3px 0 var(--border-line);
+    padding: 2px;
+    z-index: 2;
+}
+
+.album-cat-badge img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
 }
 
 @keyframes recordSpin { 100% { transform: rotate(360deg); } }
@@ -779,6 +882,49 @@ hr {
     top: 65px;
     left: 15px;
     z-index: 2;
+}
+
+.player-advanced-controls {
+    margin-top: 18px;
+    background: #fffaf9;
+    border: 2px solid var(--border-line);
+    border-radius: 14px;
+    padding: 12px 14px;
+    box-shadow: inset 0 0 0 1px rgba(93, 74, 74, 0.1);
+}
+
+.player-label {
+    display: block;
+    text-align: left;
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+#player-progress,
+#player-volume {
+    width: 100%;
+    accent-color: var(--pastel-pink);
+}
+
+.time-row,
+.volume-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+#time-display {
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+#btn-repeat {
+    background-color: var(--pastel-mint);
+    padding: 7px 12px;
+    font-size: 0.8rem;
 }
 ;
 

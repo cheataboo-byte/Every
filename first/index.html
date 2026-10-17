@@ -21,6 +21,15 @@
     <!-- 🌸 FIXED: Moved this to the absolute top of the body so the CSS and JS can find it instantly -->
     <div id="laufey-cursor-container"></div>
 
+    <div class="birthday-photo-collage" aria-label="Birthday boy photos">
+        <div class="portrait-card portrait-left">
+            <img src="../image.png" alt="Birthday boy portrait left" />
+        </div>
+        <div class="portrait-card portrait-right">
+            <img src="../pic.png" alt="Birthday boy portrait right" />
+        </div>
+    </div>
+
     <div class="window-card">
         <header>
             <p>🎄 Dec 23 Double Celebration! 🎂</p>
@@ -34,7 +43,11 @@
         <main>
             <section id="music-player">
                 <h2>🎵 Now Playing: beabadoobee</h2>
-                <div id="album-art-placeholder"></div>
+                <div id="album-art-placeholder" aria-label="Current album art">
+                    <div class="album-cat-badge">
+                        <img src="../cat.jpg" alt="Tiny cat sticker" />
+                    </div>
+                </div>
                 <p><strong>Current Track:</strong> <span id="current-song-title">Sun Has Set (Track 1)</span></p>
                 <p><strong>Album:</strong> Pylon (Latest Album) 📀</p>
                 
@@ -42,6 +55,19 @@
                     <button type="button" id="btn-prev">⏮️ Previous</button>
                     <button type="button" id="btn-play">▶️ Play Track</button>
                     <button type="button" id="btn-next">Next 🔒 (Locked)</button>
+                </div>
+
+                <div class="player-advanced-controls">
+                    <label for="player-progress" class="player-label">Progress</label>
+                    <input id="player-progress" type="range" min="0" max="100" value="0" />
+                    <div class="time-row">
+                        <span id="time-display">0:00 / 0:00</span>
+                        <button type="button" id="btn-repeat">🔁 Repeat Off</button>
+                    </div>
+                    <div class="volume-row">
+                        <label for="player-volume" class="player-label">🔊 Volume</label>
+                        <input id="player-volume" type="range" min="0" max="1" step="0.01" value="0.7" />
+                    </div>
                 </div>
 
                 <fieldset id="playlist-lock">
