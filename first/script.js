@@ -18,9 +18,9 @@ if (customCursor) {
    2. THE SUPREME LEADER TALKING INTERACTIONS
    ========================================================================== */
 const goddessQuotesList = [
-    'Greetings, dear subject. You may now offer praise! 👑',
-    'Did you remember to appreciate your Goddess today, Piseth? 🎀',
-    'I allow you to listen to Beabadoobee in my divine presence. 🍰',
+    'Yoyoyo, Piseth! What day is it?💖',
+    'Why did the poop not cross the road? Because...it had a crappy day! gugugugugugu 🎀',
+    'Wobble Wobble, Joggle Joggle Joggle, Diggi Di Doo, Dag Dag! 🍰',
     'Happy Birthday & Christmas! You have been a very good subject this year. 💕',
     'Keep guessing that password if you want more music! 👀'
 ];
@@ -53,7 +53,24 @@ const tracklist = [
     { title: 'Pylon', src: '../pylon.mp3' }
 ];
 
-let runningTrackIndex = 0;
+const breakAfterTrack = new Map([[2, 1], [5, 2], [8, 3]]);
+const playbackQueue = [];
+
+tracklist.forEach((track, songIndex) => {
+    playbackQueue.push({ ...track, type: 'song', songIndex });
+
+    const breakNumber = breakAfterTrack.get(songIndex);
+    if (breakNumber) {
+        playbackQueue.push({
+            title: `Break ${breakNumber}`,
+            src: `../break ${breakNumber}.mp3`,
+            type: 'break',
+            breakNumber
+        });
+    }
+});
+
+let runningQueueIndex = 0;
 let isMusicPlaying = false;
 let isPlaylistUnlocked = false;
 let isLooping = false;
@@ -100,23 +117,37 @@ function updateProgressBar() {
 
 function updateSongDisplay() {
     if (songTitleElement) {
-        songTitleElement.innerText = tracklist[runningTrackIndex].title;
+        const currentEntry = playbackQueue[runningQueueIndex];
+        songTitleElement.innerText = currentEntry.type === 'break'
+            ? `Break ${currentEntry.breakNumber} of 3 - Please listen`
+            : currentEntry.title;
     }
 }
 
 function setPlayButtonLabel() {
     if (!playButtonElement) return;
-    playButtonElement.innerText = isMusicPlaying ? '⏸️ Pause Track' : '▶️ Play Track';
+    const currentEntry = playbackQueue[runningQueueIndex];
+    const label = currentEntry.type === 'break' ? 'Break' : 'Track';
+    playButtonElement.innerText = isMusicPlaying ? `⏸️ Pause ${label}` : `▶️ Play ${label}`;
+}
+
+function updateControlsForCurrentEntry() {
+    const isBreak = playbackQueue[runningQueueIndex].type === 'break';
+    if (nextButtonElement) nextButtonElement.disabled = isBreak;
+    if (prevButtonElement) prevButtonElement.disabled = isBreak;
+    if (progressBarElement) progressBarElement.disabled = isBreak;
 }
 
 function loadTrack(index, autoPlay = false) {
-    const track = tracklist[index];
-    if (!track) return;
+    const entry = playbackQueue[index];
+    if (!entry) return;
 
-    runningTrackIndex = index;
-    audioPlayer.src = track.src;
+    runningQueueIndex = index;
+    audioPlayer.loop = false;
+    audioPlayer.src = entry.src;
     audioPlayer.load();
     updateSongDisplay();
+    updateControlsForCurrentEntry();
     updateProgressBar();
 
     if (autoPlay) {
@@ -128,7 +159,8 @@ function loadTrack(index, autoPlay = false) {
 
 if (playButtonElement && albumDiskGraphic) {
     playButtonElement.addEventListener('click', () => {
-        if (!isPlaylistUnlocked && runningTrackIndex > 0) {
+        const currentEntry = playbackQueue[runningQueueIndex];
+        if (!isPlaylistUnlocked && currentEntry.type === 'song' && currentEntry.songIndex > 0) {
             if (speechBubbleElement) {
                 speechBubbleElement.innerHTML = '<p>💬 <em>"Access Denied! Solve the puzzle first, subject! 🔒"</em></p>';
             }
@@ -156,24 +188,29 @@ if (playButtonElement && albumDiskGraphic) {
 
 if (prevButtonElement) {
     prevButtonElement.addEventListener('click', () => {
-        runningTrackIndex = (runningTrackIndex - 1 + tracklist.length) % tracklist.length;
-        updateSongDisplay();
-        loadTrack(runningTrackIndex, isMusicPlaying);
+        if (playbackQueue[runningQueueIndex].type === 'break') return;
+
+        const previousIndex = (runningQueueIndex - 1 + playbackQueue.length) % playbackQueue.length;
+        const previousEntry = playbackQueue[previousIndex];
+        if (!isPlaylistUnlocked && previousEntry.type === 'song' && previousEntry.songIndex > 0) return;
+        loadTrack(previousIndex, isMusicPlaying);
     });
 }
 
 if (nextButtonElement) {
     nextButtonElement.addEventListener('click', () => {
-        if (!isPlaylistUnlocked) {
+        if (playbackQueue[runningQueueIndex].type === 'break') return;
+
+        const nextIndex = (runningQueueIndex + 1) % playbackQueue.length;
+        const nextEntry = playbackQueue[nextIndex];
+        if (!isPlaylistUnlocked && nextEntry.type === 'song' && nextEntry.songIndex > 0) {
             if (speechBubbleElement) {
                 speechBubbleElement.innerHTML = '<p>💬 <em>"Access Denied! Solve the puzzle first, subject! 🔒"</em></p>';
             }
             return;
         }
 
-        runningTrackIndex = (runningTrackIndex + 1) % tracklist.length;
-        updateSongDisplay();
-        loadTrack(runningTrackIndex, isMusicPlaying);
+        loadTrack(nextIndex, isMusicPlaying);
     });
 }
 
@@ -214,13 +251,16 @@ audioPlayer.addEventListener('pause', () => {
 audioPlayer.addEventListener('timeupdate', updateProgressBar);
 
 audioPlayer.addEventListener('ended', () => {
-    if (!isLooping) {
-        runningTrackIndex = (runningTrackIndex + 1) % tracklist.length;
-        loadTrack(runningTrackIndex, true);
-    } else {
-        audioPlayer.currentTime = 0;
-        audioPlayer.play();
+    const currentEntry = playbackQueue[runningQueueIndex];
+    const nextIndex = (runningQueueIndex + 1) % playbackQueue.length;
+    const nextEntry = playbackQueue[nextIndex];
+
+    if (isLooping && currentEntry.type === 'song' && nextEntry.type !== 'break') {
+        loadTrack(runningQueueIndex, true);
+        return;
     }
+
+    loadTrack(nextIndex, true);
 });
 
 /* ==========================================================================

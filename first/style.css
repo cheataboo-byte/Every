@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 /* --- 1. DESIGN THEMES & PASTEL COLOR GRAPHICS --- */
 :root {
     --bg-cream: #FFFDF9;
@@ -38,43 +40,84 @@ a, button, input, label, [id^="btn-"], .task-card {
 
 .birthday-photo-collage {
     position: fixed;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+    inset: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 360px) minmax(0, 360px);
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px;
+    box-sizing: border-box;
     z-index: 20;
     pointer-events: none;
 }
 
-.portrait-card {
-    width: 120px;
-    height: 150px;
-    background: #fffaf8;
-    border: 3px solid var(--border-line);
-    border-radius: 20px;
-    box-shadow: 5px 5px 0 var(--border-line);
-    padding: 8px;
-    transform: rotate(-4deg);
-    overflow: hidden;
+.portrait-stack {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
 }
 
-.portrait-card.portrait-right {
-    transform: rotate(6deg) translateX(8px);
+.portrait-stack-right {
+    justify-self: end;
+}
+
+.portrait-card {
+    position: relative;
+    width: auto;
+    height: 154px;
+    box-sizing: border-box;
+    background: #fffaf8;
+    border: 3px solid var(--border-line);
+    border-radius: 18px;
+    box-shadow: 5px 6px 0 var(--border-line);
+    padding: 7px;
+    overflow: hidden;
+    margin: 0;
+}
+
+.portrait-stack-left .portrait-card:nth-child(odd) {
+    transform: rotate(-4deg);
+}
+
+.portrait-stack-left .portrait-card:nth-child(even) {
+    transform: rotate(3deg) translateX(8px);
+}
+
+.portrait-stack-right .portrait-card:nth-child(odd) {
+    transform: rotate(4deg);
+}
+
+.portrait-stack-right .portrait-card:nth-child(even) {
+    transform: rotate(-3deg) translateX(-8px);
 }
 
 .portrait-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 14px;
+    object-position: center 30%;
+    border-radius: 12px;
     display: block;
+}
+
+.portrait-card figcaption {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 11px;
+    padding: 5px 4px;
+    border: 2px solid var(--border-line);
+    border-radius: 10px;
+    background: rgba(255, 250, 248, 0.94);
+    color: var(--text-dark-brown);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-align: center;
 }
 
 body::before,
 body::after {
-    content: '✨';
+    content: '\2728';
     position: fixed;
     font-size: 24px;
     z-index: 0;
@@ -89,6 +132,60 @@ body::before {
 body::after {
     bottom: 110px;
     left: 140px;
+}
+
+#btn-next:disabled,
+#btn-prev:disabled,
+#player-progress:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+@media (max-width: 1350px) {
+    body {
+        flex-direction: column;
+    }
+
+    .birthday-photo-collage {
+        position: static;
+        inset: auto;
+        transform: none;
+        width: min(100%, 570px);
+        margin: 0 auto 24px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-items: stretch;
+        padding: 0;
+        gap: 12px;
+    }
+
+    .portrait-stack,
+    .portrait-stack-right {
+        position: static;
+        transform: none;
+        display: contents;
+    }
+
+    .portrait-card {
+        width: auto;
+        height: 168px;
+    }
+
+    .portrait-stack-left .portrait-card:nth-child(n),
+    .portrait-stack-right .portrait-card:nth-child(n) {
+        transform: none;
+    }
+}
+
+@media (max-width: 520px) {
+    .birthday-photo-collage {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: 360px;
+    }
+
+    .portrait-card {
+        height: 138px;
+    }
 }
 
 /* --- 2. THE CUSTOM LAUFEY MOUSE POINTER --- */
@@ -110,7 +207,7 @@ body::after {
     overflow: hidden;
 }
 #laufey-cursor-container::before {
-    content: '✨';
+    content: '\2728';
     font-size: 16px;
     position: absolute;
     top: -8px;
@@ -124,7 +221,7 @@ body::after {
     border: 2px solid var(--border-line);
 }
 #laufey-cursor-container::after {
-    content: '♥';
+    content: '\2665';
     font-size: 12px;
     color: #ff6b8d;
     position: absolute;
@@ -141,6 +238,7 @@ body::after {
     box-shadow: 10px 10px 0px var(--border-line); 
     max-width: 480px;
     width: 100%;
+    box-sizing: border-box;
     padding: 35px 25px;
     text-align: center;
     position: relative;
@@ -375,7 +473,7 @@ hr {
 }
 
 #gift-coupons input[type="checkbox"]:checked::after {
-    content: '✨';
+    content: '\2728';
     font-size: 12px;
     position: absolute;
     top: -1px;
@@ -515,16 +613,6 @@ hr {
     top: 65px;
     left: 15px;
     z-index: 2;
-}
-    display: inline-block;
-    background-color: var(--christmas-red);
-    border: 3px solid var(--border-line);
-    padding: 6px 20px;
-    border-radius: 50px;
-    font-weight: bold;
-    font-size: 0.95rem;
-    box-shadow: 4px 4px 0px var(--border-line);
-    margin: 0 0 15px 0;
 }
 
 .window-card h1 {
@@ -742,7 +830,7 @@ hr {
 }
 
 #gift-coupons input[type="checkbox"]:checked::after {
-    content: '✨';
+    content: '\2728';
     font-size: 12px;
     position: absolute;
     top: -1px;
