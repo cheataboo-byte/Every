@@ -1,0 +1,1019 @@
+@charset "UTF-8";
+
+/* --- 1. DESIGN THEMES & PASTEL COLOR GRAPHICS --- */
+:root {
+    --bg-cream: #FFFDF9;
+    --bg-pastel-pink: #FFF0F2;
+    --text-dark-brown: #5D4A4A;
+    --border-line: #4E3E3E;
+    --pastel-pink: #FFB7B2;
+    --pastel-peach: #FFDAC1;
+    --pastel-mint: #E2F0CB;
+    --christmas-red: #FFADAD;
+    --denim-blue: #A0C4FF;
+    --bubbly-radius: 24px;
+}
+
+/* Stationery Graph Grid Layout */
+body {
+    background-color: var(--bg-pastel-pink);
+    background-image: 
+        linear-gradient(rgba(93, 74, 74, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(93, 74, 74, 0.04) 1px, transparent 1px);
+    background-size: 20px 20px;
+    color: var(--text-dark-brown);
+    font-family: 'Fredoka', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 40px 20px;
+    overflow-x: hidden;
+    cursor: none;
+    position: relative;
+}
+
+a, button, input, label, [id^="btn-"], .task-card {
+    cursor: none !important;
+}
+
+.birthday-photo-collage {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 360px) minmax(0, 360px);
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px;
+    box-sizing: border-box;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.portrait-stack {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.portrait-stack-right {
+    justify-self: end;
+}
+
+.portrait-card {
+    position: relative;
+    width: auto;
+    height: 154px;
+    box-sizing: border-box;
+    background: #fffaf8;
+    border: 3px solid var(--border-line);
+    border-radius: 18px;
+    box-shadow: 5px 6px 0 var(--border-line);
+    padding: 7px;
+    overflow: hidden;
+    margin: 0;
+}
+
+.portrait-stack-left .portrait-card:nth-child(odd) {
+    transform: rotate(-4deg);
+}
+
+.portrait-stack-left .portrait-card:nth-child(even) {
+    transform: rotate(3deg) translateX(8px);
+}
+
+.portrait-stack-right .portrait-card:nth-child(odd) {
+    transform: rotate(4deg);
+}
+
+.portrait-stack-right .portrait-card:nth-child(even) {
+    transform: rotate(-3deg) translateX(-8px);
+}
+
+.portrait-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    border-radius: 12px;
+    display: block;
+}
+
+.portrait-card figcaption {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 11px;
+    padding: 5px 4px;
+    border: 2px solid var(--border-line);
+    border-radius: 10px;
+    background: rgba(255, 250, 248, 0.94);
+    color: var(--text-dark-brown);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+body::before,
+body::after {
+    content: '\2728';
+    position: fixed;
+    font-size: 24px;
+    z-index: 0;
+    opacity: 0.8;
+}
+
+body::before {
+    top: 80px;
+    right: 90px;
+}
+
+body::after {
+    bottom: 110px;
+    left: 140px;
+}
+
+#btn-next:disabled,
+#btn-prev:disabled,
+#player-progress:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+@media (max-width: 1350px) {
+    body {
+        flex-direction: column;
+    }
+
+    .birthday-photo-collage {
+        position: static;
+        inset: auto;
+        transform: none;
+        width: min(100%, 570px);
+        margin: 0 auto 24px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-items: stretch;
+        padding: 0;
+        gap: 12px;
+    }
+
+    .portrait-stack,
+    .portrait-stack-right {
+        position: static;
+        transform: none;
+        display: contents;
+    }
+
+    .portrait-card {
+        width: auto;
+        height: 168px;
+    }
+
+    .portrait-stack-left .portrait-card:nth-child(n),
+    .portrait-stack-right .portrait-card:nth-child(n) {
+        transform: none;
+    }
+}
+
+@media (max-width: 520px) {
+    .birthday-photo-collage {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: 360px;
+    }
+
+    .portrait-card {
+        height: 138px;
+    }
+}
+
+/* --- 2. THE CUSTOM LAUFEY MOUSE POINTER --- */
+#laufey-cursor-container {
+    width: 52px;
+    height: 52px;
+    background-image: url("pompom.jpg");
+    background-size: cover;
+    background-position: center;
+    border: 3px solid var(--border-line);
+    border-radius: 18px;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%) rotate(-8deg);
+    box-shadow: 4px 4px 0px var(--border-line);
+    left: -50px;
+    top: -50px;
+    overflow: hidden;
+}
+#laufey-cursor-container::before {
+    content: '\2728';
+    font-size: 16px;
+    position: absolute;
+    top: -8px;
+    right: -3px;
+    background: rgba(255,255,255,0.7);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 2px solid var(--border-line);
+}
+#laufey-cursor-container::after {
+    content: '\2665';
+    font-size: 12px;
+    color: #ff6b8d;
+    position: absolute;
+    bottom: 5px;
+    left: 6px;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.15);
+}
+
+/* --- 3. MAIN WINDOW INTERFACE DASHBOARD --- */
+.window-card {
+    background-color: var(--bg-cream);
+    border: 4px solid var(--border-line);
+    border-radius: var(--bubbly-radius);
+    box-shadow: 10px 10px 0px var(--border-line); 
+    max-width: 480px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 35px 25px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    margin-bottom: 60px;
+}
+
+.window-card header p:first-child {
+    display: inline-block;
+    background-color: var(--christmas-red);
+    border: 3px solid var(--border-line);
+    padding: 6px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    box-shadow: 4px 4px 0px var(--border-line);
+    margin: 0 0 15px 0;
+}
+
+.window-card h1 {
+    font-size: 2.5rem;
+    margin: 0 0 5px 0;
+    color: var(--text-dark-brown);
+}
+
+.window-card header p:last-of-type {
+    font-size: 1.1rem;
+    margin: 0 0 20px 0;
+    opacity: 0.85;
+}
+
+#countdown-display {
+    background-color: var(--pastel-peach);
+    border: 3px solid var(--border-line);
+    padding: 12px;
+    border-radius: 16px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    box-shadow: 4px 4px 0px var(--border-line);
+    margin-bottom: 25px;
+}
+
+hr {
+    border: none;
+    border-top: 3px dashed var(--border-line);
+    margin: 25px 0;
+    opacity: 0.3;
+}
+
+/* --- 4. BEABADOOBEE MUSIC PLAYER --- */
+#music-player {
+    background: #FFFDF9;
+    border: 3px solid var(--border-line);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 5px 5px 0px var(--border-line);
+    text-align: center;
+}
+
+#music-player h2 {
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+#album-art-placeholder {
+    width: 120px !important;
+    height: 120px !important;
+    background-image: url("beabadoobee.jpg");
+    background-size: cover;
+    background-position: center;
+    margin: 0 auto 15px auto;
+    border-radius: 24px !important;
+    border: 4px solid var(--border-line) !important;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    animation: recordSpin 4s linear infinite;
+    animation-play-state: paused;
+    overflow: visible;
+}
+
+#album-art-placeholder::after {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border-radius: 18px;
+    border: 2px solid rgba(255,255,255,0.65);
+}
+
+.album-cat-badge {
+    position: absolute;
+    right: -12px;
+    bottom: -10px;
+    width: 42px;
+    height: 42px;
+    border: 3px solid var(--border-line);
+    border-radius: 50%;
+    background: #fffaf8;
+    box-shadow: 3px 3px 0 var(--border-line);
+    padding: 2px;
+    z-index: 2;
+}
+
+.album-cat-badge img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+}
+
+@keyframes recordSpin { 100% { transform: rotate(360deg); } }
+
+#player-controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+[id^="btn-"] {
+    background-color: var(--pastel-peach);
+    color: var(--text-dark-brown);
+    border: 3px solid var(--border-line);
+    border-radius: 50px;
+    padding: 8px 16px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.95rem;
+    font-weight: bold;
+    box-shadow: 0px 4px 0px var(--border-line);
+    transition: all 0.1s ease;
+}
+
+[id^="btn-"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 0px var(--border-line);
+    background-color: var(--pastel-pink);
+}
+
+[id^="btn-"]:active {
+    transform: translateY(4px);
+    box-shadow: 0px 0px 0px var(--border-line);
+}
+
+#btn-next {
+    background-color: #E0E0E0;
+    opacity: 0.8;
+}
+
+/* --- 5. PASSWORD VAULT --- */
+#playlist-lock {
+    border: 3px dashed var(--border-line);
+    border-radius: 16px;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: #FFF9FA;
+}
+
+#playlist-lock legend {
+    background: var(--pastel-mint);
+    border: 2px solid var(--border-line);
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 0.9  rem;
+}
+
+#playlist-password {
+    width: 75%;
+    padding: 10px 15px;
+    border: 3px solid var(--border-line);
+    border-radius: 50px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    text-align: center;
+    margin-bottom: 10px;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05);
+}
+
+#hint-section {
+    border-radius: 12px !important;
+    border: 2px dotted var(--border-line) !important;
+    background-color: #FFFDF9 !important;
+    padding: 8px 12px !important;
+}
+
+/* --- 6. EXCLUSIVE TASK COUPONS --- */
+#gift-coupons { text-align: left; }
+#gift-coupons h2 { font-size: 1.4rem; text-align: center; margin-bottom: 15px; }
+#gift-coupons ul {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 12px;
+}
+
+#gift-coupons li label {
+    display: flex;
+    align-items: center;
+    background: #FFFDF9;
+    border: 3px solid var(--border-line);
+    padding: 12px 16px;
+    border-radius: 16px;
+    box-shadow: 4px 4px 0px var(--border-line);
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+#gift-coupons li label:hover {
+    transform: translateX(4px);
+    background-color: #FFF5F6;
+}
+
+#gift-coupons input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 3px solid var(--border-line);
+    border-radius: 6px;
+    background: white;
+    margin-right: 12px;
+    position: relative;
+    transition: 0.15s;
+}
+
+#gift-coupons input[type="checkbox"]:checked {
+    background-color: var(--pastel-pink);
+}
+
+#gift-coupons input[type="checkbox"]:checked::after {
+    content: '\2728';
+    font-size: 12px;
+    position: absolute;
+    top: -1px;
+    left: 1px;
+}
+
+/* --- 7. THE AVATAR SYSTEM NODE (Bottom Right Alignment) --- */
+#avatar-section {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 100;
+}
+
+#goddess-speech-bubble {
+    background: white !important;
+    border: 3px solid var(--border-line) !important;
+    border-radius: 16px !important;
+    padding: 6px 14px !important;
+    max-width: 170px !important;
+    box-shadow: 4px 4px 0px var(--border-line);
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: -5px;
+    position: relative;
+    animation: floatingBob 3s ease-in-out infinite;
+}
+
+#goddess-speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -11px;
+    right: 45px;
+    border-width: 11px 11px 0;
+    border-style: solid;
+    border-color: var(--border-line) transparent;
+    display: block;
+    width: 0;
+}
+
+#goddess-speech-bubble p { margin: 0; }
+
+/* Pure CSS Character Body Styles */
+#avatar-anatomy-root {
+    width: 100px;
+    height: 130px;
+    position: relative;
+    font-size: 0px; 
+    animation: floatingBob 3s ease-in-out infinite;
+}
+
+@keyframes floatingBob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+#avatar-anatomy-root::before {
+    content: '';
+    position: absolute;
+    width: 78px;
+    height: 75px;
+    background: #2D2626; 
+    border: 3px solid var(--border-line);
+    border-radius: 22px;
+    top: 10px;
+    left: 11px;
+    z-index: 1;
+}
+
+#avatar-anatomy-root ul { padding: 0; margin: 0; list-style: none; }
+#avatar-anatomy-root li { font-size: 0px; position: absolute; }
+
+/* Crown Shape Placement */
+#avatar-anatomy-root li:nth-child(1) {
+    font-size: 20px !important;
+    top: -12px;
+    left: 38px;
+    z-index: 10;
+}
+
+/* Face Node & Bangs */
+#avatar-anatomy-root li:nth-child(3) {
+    display: block;
+    width: 54px;
+    height: 54px;
+    background: #FFE3D1; 
+    border: 3px solid var(--border-line);
+    border-radius: 50%;
+    top: 15px;
+    left: 23px;
+    z-index: 3;
+}
+#avatar-anatomy-root li:nth-child(3)::before {
+    content: '';
+    position: absolute;
+    width: 62px;
+    height: 25px;
+    background: #2D2626;
+    border: 3px solid var(--border-line);
+    border-radius: 15px 15px 4px 4px;
+    top: -4px;
+    left: -7px;
+    z-index: 4;
+}
+
+/* Eye Glasses Frame */
+#avatar-anatomy-root li:nth-child(2) {
+    display: flex;
+    gap: 4px;
+    top: 31px;
+    left: 28px;
+    z-index: 5;
+}
+#avatar-anatomy-root li:nth-child(2)::before, 
+#avatar-anatomy-root li:nth-child(2)::after {
+    content: '';
+    width: 16px;
+    height: 14px;
+    border: 3px solid #1A1A1A;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 5px;
+    display: inline-block;
+}
+
+/* Pink Blouse Shape */
+#avatar-anatomy-root li:nth-child(4) {
+    display: block;
+    width: 70px;
+    height: 50px;
+    background: var(--pastel-pink);
+    border: 3px solid var(--border-line);
+    border-radius: 0px 0px 20px 20px;
+    top: 65px;
+    left: 15px;
+    z-index: 2;
+}
+
+.window-card h1 {
+    font-size: 2.5rem;
+    margin: 0 0 5px 0;
+    color: var(--text-dark-brown);
+}
+
+.window-card header p:last-of-type {
+    font-size: 1.1rem;
+    margin: 0 0 20px 0;
+    opacity: 0.85;
+}
+
+#countdown-display {
+    background-color: var(--pastel-peach);
+    border: 3px solid var(--border-line);
+    padding: 12px;
+    border-radius: 16px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    box-shadow: 4px 4px 0px var(--border-line);
+    margin-bottom: 25px;
+}
+
+hr {
+    border: none;
+    border-top: 3px dashed var(--border-line);
+    margin: 25px 0;
+    opacity: 0.3;
+}
+
+/* --- 4. BEABADOOBEE MUSIC PLAYER --- */
+#music-player {
+    background: #FFFDF9;
+    border: 3px solid var(--border-line);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 5px 5px 0px var(--border-line);
+    text-align: center;
+}
+
+#music-player h2 {
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+#album-art-placeholder {
+    width: 120px !important;
+    height: 120px !important;
+    background-image: url("beabadoobee.jpg");
+    background-size: cover;
+    background-position: center;
+    margin: 0 auto 15px auto;
+    border-radius: 24px !important;
+    border: 4px solid var(--border-line) !important;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    animation: recordSpin 4s linear infinite;
+    animation-play-state: paused;
+    overflow: visible;
+}
+
+#album-art-placeholder::after {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border-radius: 18px;
+    border: 2px solid rgba(255,255,255,0.65);
+}
+
+.album-cat-badge {
+    position: absolute;
+    right: -12px;
+    bottom: -10px;
+    width: 42px;
+    height: 42px;
+    border: 3px solid var(--border-line);
+    border-radius: 50%;
+    background: #fffaf8;
+    box-shadow: 3px 3px 0 var(--border-line);
+    padding: 2px;
+    z-index: 2;
+}
+
+.album-cat-badge img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+}
+
+@keyframes recordSpin { 100% { transform: rotate(360deg); } }
+
+#player-controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+[id^="btn-"] {
+    background-color: var(--pastel-peach);
+    color: var(--text-dark-brown);
+    border: 3px solid var(--border-line);
+    border-radius: 50px;
+    padding: 8px 16px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.95rem;
+    font-weight: bold;
+    box-shadow: 0px 4px 0px var(--border-line);
+    transition: all 0.1s ease;
+}
+
+[id^="btn-"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 0px var(--border-line);
+    background-color: var(--pastel-pink);
+}
+
+[id^="btn-"]:active {
+    transform: translateY(4px);
+    box-shadow: 0px 0px 0px var(--border-line);
+}
+
+#btn-next {
+    background-color: #E0E0E0;
+    opacity: 0.8;
+}
+
+/* --- 5. PASSWORD VAULT --- */
+#playlist-lock {
+    border: 3px dashed var(--border-line);
+    border-radius: 16px;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: #FFF9FA;
+}
+
+#playlist-lock legend {
+    background: var(--pastel-mint);
+    border: 2px solid var(--border-line);
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 0.9  rem;
+}
+
+#playlist-password {
+    width: 75%;
+    padding: 10px 15px;
+    border: 3px solid var(--border-line);
+    border-radius: 50px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    text-align: center;
+    margin-bottom: 10px;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05);
+}
+
+#hint-section {
+    border-radius: 12px !important;
+    border: 2px dotted var(--border-line) !important;
+    background-color: #FFFDF9 !important;
+    padding: 8px 12px !important;
+}
+
+/* --- 6. EXCLUSIVE TASK COUPONS --- */
+#gift-coupons { text-align: left; }
+#gift-coupons h2 { font-size: 1.4rem; text-align: center; margin-bottom: 15px; }
+#gift-coupons ul {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 12px;
+}
+
+#gift-coupons li label {
+    display: flex;
+    align-items: center;
+    background: #FFFDF9;
+    border: 3px solid var(--border-line);
+    padding: 12px 16px;
+    border-radius: 16px;
+    box-shadow: 4px 4px 0px var(--border-line);
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+#gift-coupons li label:hover {
+    transform: translateX(4px);
+    background-color: #FFF5F6;
+}
+
+#gift-coupons input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 3px solid var(--border-line);
+    border-radius: 6px;
+    background: white;
+    margin-right: 12px;
+    position: relative;
+    transition: 0.15s;
+}
+
+#gift-coupons input[type="checkbox"]:checked {
+    background-color: var(--pastel-pink);
+}
+
+#gift-coupons input[type="checkbox"]:checked::after {
+    content: '\2728';
+    font-size: 12px;
+    position: absolute;
+    top: -1px;
+    left: 1px;
+}
+
+/* --- 7. THE AVATAR SYSTEM NODE (Bottom Right Alignment) --- */
+#avatar-section {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 100;
+}
+
+#goddess-speech-bubble {
+    background: white !important;
+    border: 3px solid var(--border-line) !important;
+    border-radius: 16px !important;
+    padding: 6px 14px !important;
+    max-width: 170px !important;
+    box-shadow: 4px 4px 0px var(--border-line);
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: -5px;
+    position: relative;
+    animation: floatingBob 3s ease-in-out infinite;
+}
+
+#goddess-speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -11px;
+    right: 45px;
+    border-width: 11px 11px 0;
+    border-style: solid;
+    border-color: var(--border-line) transparent;
+    display: block;
+    width: 0;
+}
+
+#goddess-speech-bubble p { margin: 0; }
+
+/* Pure CSS Character Body Styles */
+#avatar-anatomy-root {
+    width: 100px;
+    height: 130px;
+    position: relative;
+    font-size: 0px; 
+    animation: floatingBob 3s ease-in-out infinite;
+}
+
+@keyframes floatingBob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+#avatar-anatomy-root::before {
+    content: '';
+    position: absolute;
+    width: 78px;
+    height: 75px;
+    background: #2D2626; 
+    border: 3px solid var(--border-line);
+    border-radius: 22px;
+    top: 10px;
+    left: 11px;
+    z-index: 1;
+}
+
+#avatar-anatomy-root ul { padding: 0; margin: 0; list-style: none; }
+#avatar-anatomy-root li { font-size: 0px; position: absolute; }
+
+/* Crown Shape Placement */
+#avatar-anatomy-root li:nth-child(1) {
+    font-size: 20px !important;
+    top: -12px;
+    left: 38px;
+    z-index: 10;
+}
+
+/* Face Node & Bangs */
+#avatar-anatomy-root li:nth-child(3) {
+    display: block;
+    width: 54px;
+    height: 54px;
+    background: #FFE3D1; 
+    border: 3px solid var(--border-line);
+    border-radius: 50%;
+    top: 15px;
+    left: 23px;
+    z-index: 3;
+}
+#avatar-anatomy-root li:nth-child(3)::before {
+    content: '';
+    position: absolute;
+    width: 62px;
+    height: 25px;
+    background: #2D2626;
+    border: 3px solid var(--border-line);
+    border-radius: 15px 15px 4px 4px;
+    top: -4px;
+    left: -7px;
+    z-index: 4;
+}
+
+/* Eye Glasses Frame */
+#avatar-anatomy-root li:nth-child(2) {
+    display: flex;
+    gap: 4px;
+    top: 31px;
+    left: 28px;
+    z-index: 5;
+}
+#avatar-anatomy-root li:nth-child(2)::before, 
+#avatar-anatomy-root li:nth-child(2)::after {
+    content: '';
+    width: 16px;
+    height: 14px;
+    border: 3px solid #1A1A1A;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 5px;
+    display: inline-block;
+}
+
+/* Pink Blouse Shape */
+#avatar-anatomy-root li:nth-child(4) {
+    display: block;
+    width:270px;
+    height: 50px;
+    background: var(--denim-blue);
+    border: 3px solid var(--border-line);
+    border-radius: 0px 0px 20px 20px;
+    top: 65px;
+    left: 15px;
+    z-index: 2;
+}
+
+.player-advanced-controls {
+    margin-top: 18px;
+    background: #fffaf9;
+    border: 2px solid var(--border-line);
+    border-radius: 14px;
+    padding: 12px 14px;
+    box-shadow: inset 0 0 0 1px rgba(93, 74, 74, 0.1);
+}
+
+.player-label {
+    display: block;
+    text-align: left;
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+#player-progress,
+#player-volume {
+    width: 100%;
+    accent-color: var(--pastel-pink);
+}
+
+.time-row,
+.volume-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+#time-display {
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+#btn-repeat {
+    background-color: var(--pastel-mint);
+    padding: 7px 12px;
+    font-size: 0.8rem;
+}
+;
+
+
