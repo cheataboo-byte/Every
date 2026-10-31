@@ -40,15 +40,15 @@ if (avatarSection && speechBubbleElement) {
    ========================================================================== */
 const tracklist = [
     { title: 'Sun Has Set', src: '../Sun Has Set.mp3' },
-    { title: 'Estranged', src: '../beabadoobee - Estranged (Official Lyric Video).mp3' },
-    { title: 'In Motion', src: '../beabadoobee - In Motion (Official Lyric Video).mp3' },
-    { title: "It's Alright", src: "../beabadoobee - It's Alright (Official Lyric Video).mp3" },
-    { title: 'Nothing To Prove', src: '../beabadoobee - Nothing To Prove (Official Lyric Video).mp3' },
-    { title: 'Powerlines', src: '../beabadoobee - Powerlines (Official Lyric Video).mp3' },
-    { title: 'Radio', src: '../beabadoobee - Radio (Official Lyric Video).mp3' },
-    { title: 'Spark', src: '../beabadoobee - Spark (Official Lyric Video).mp3' },
-    { title: 'Switchblade', src: '../beabadoobee - Switchblade (Official Lyric Video).mp3' },
-    { title: 'Write Me A Letter', src: '../Beabadoobee - Write Me A Letter (Official Video).mp3' },
+    { title: 'Estranged', src: '../estrranged.mp3' },
+    { title: 'In Motion', src: '../In Motion.mp3' },
+    { title: "It's Alright", src: "../It's Alright.mp3" },
+    { title: 'Nothing To Prove', src: '../Nothing to prove.mp3' },
+    { title: 'Powerlines', src: '../Powerlines.mp3' },
+    { title: 'Radio', src: '../Radio.mp3' },
+    { title: 'Spark', src: '../Spark.mp3' },
+    { title: 'Switchblade', src: '../Switchblade.mp3' },
+    { title: 'Write Me A Letter', src: '../Write me a letter.mp3' },
     { title: 'Despite That', src: '../Despite That.mp3' },
     { title: 'Pylon', src: '../pylon.mp3' }
 ];
