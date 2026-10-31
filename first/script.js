@@ -39,18 +39,18 @@ if (avatarSection && speechBubbleElement) {
    3. BEABADOOBEE PLAYER CONTROLS & AUDIO ATTACHMENT
    ========================================================================== */
 const tracklist = [
-    { title: 'Sun Has Set', src: '../Sun Has Set.mp3' },
-    { title: 'Estranged', src: '../estrranged.mp3' },
-    { title: 'In Motion', src: '../In Motion.mp3' },
-    { title: "It's Alright", src: "../It's Alright.mp3" },
-    { title: 'Nothing To Prove', src: '../Nothing to prove.mp3' },
-    { title: 'Powerlines', src: '../Powerlines.mp3' },
-    { title: 'Radio', src: '../Radio.mp3' },
-    { title: 'Spark', src: '../Spark.mp3' },
-    { title: 'Switchblade', src: '../Switchblade.mp3' },
-    { title: 'Write Me A Letter', src: '../Write me a letter.mp3' },
-    { title: 'Despite That', src: '../Despite That.mp3' },
-    { title: 'Pylon', src: '../pylon.mp3' }
+    { title: 'Sun Has Set', src: 'Sun Has Set.mp3' },
+    { title: 'Estranged', src: 'estrranged.mp3' },
+    { title: 'In Motion', src: 'In Motion.mp3' },
+    { title: "It's Alright", src: "It's Alright.mp3" },
+    { title: 'Nothing To Prove', src: 'Nothing to prove.mp3' },
+    { title: 'Powerlines', src: 'Powerlines.mp3' },
+    { title: 'Radio', src: 'Radio.mp3' },
+    { title: 'Spark', src: 'Spark.mp3' },
+    { title: 'Switchblade', src: 'Switchblade.mp3' },
+    { title: 'Write Me A Letter', src: 'Write me a letter.mp3' },
+    { title: 'Despite That', src: 'Despite That.mp3' },
+    { title: 'Pylon', src: 'pylon.mp3' }
 ];
 
 const breakAfterTrack = new Map([[2, 1], [5, 2], [8, 3]]);
@@ -63,7 +63,7 @@ tracklist.forEach((track, songIndex) => {
     if (breakNumber) {
         playbackQueue.push({
             title: `Break ${breakNumber}`,
-            src: `../break ${breakNumber}.mp3`,
+            src: `break ${breakNumber}.mp3`,
             type: 'break',
             breakNumber
         });

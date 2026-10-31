@@ -192,7 +192,7 @@ body::after {
 #laufey-cursor-container {
     width: 52px;
     height: 52px;
-    background-image: url("../pompom.jpg");
+    background-image: url("pompom.jpg");
     background-size: cover;
     background-position: center;
     border: 3px solid var(--border-line);
@@ -307,7 +307,7 @@ hr {
 #album-art-placeholder {
     width: 120px !important;
     height: 120px !important;
-    background-image: url("../beabadoobee.jpg");
+    background-image: url("beabadoobee.jpg");
     background-size: cover;
     background-position: center;
     margin: 0 auto 15px auto;
@@ -664,7 +664,7 @@ hr {
 #album-art-placeholder {
     width: 120px !important;
     height: 120px !important;
-    background-image: url("../beabadoobee.jpg");
+    background-image: url("beabadoobee.jpg");
     background-size: cover;
     background-position: center;
     margin: 0 auto 15px auto;
