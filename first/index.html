@@ -40,17 +40,17 @@
                 <img src="pic 500.jpg" alt="A fluffy pomeranian" />
                 <figcaption>Floofy friend</figcaption>
             </figure>
-            <figure class="portrait-card">
+            <figure class="portrait-card memory-trigger" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="memory-modal" aria-label="Open the Game night memory letter" data-memory="game-night">
                 <img src="pic 700.jpg" alt="A favorite game memory" />
                 <figcaption>Game night</figcaption>
             </figure>
-            <figure class="portrait-card">
+            <figure class="portrait-card memory-trigger" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="memory-modal" aria-label="Open the Silly moments memory letter" data-memory="silly-moments">
                 <img src="pic 900.jpg" alt="A funny strawberry-face photo" />
                 <figcaption>Silly moments</figcaption>
             </figure>
         </div>
         <div class="portrait-stack portrait-stack-right">
-            <figure class="portrait-card">
+            <figure class="portrait-card memory-trigger" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="memory-modal" aria-label="Open the Birthday cutie memory letter" data-memory="birthday-cutie">
                 <img src="pic.png" alt="Piseth smiling in a flower crown" />
                 <figcaption>Birthday cutie</figcaption>
             </figure>
@@ -58,11 +58,11 @@
                 <img src="pic 200.jpg" alt="Piseth relaxing at home" />
                 <figcaption>Picture perfect</figcaption>
             </figure>
-            <figure class="portrait-card">
+            <figure class="portrait-card memory-trigger" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="memory-modal" aria-label="Open the Cutest ever memory letter" data-memory="cutest-ever">
                 <img src="pic 400.jpg" alt="Piseth with a playful photo filter" />
                 <figcaption>Cutest ever</figcaption>
             </figure>
-            <figure class="portrait-card">
+            <figure class="portrait-card memory-trigger" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="memory-modal" aria-label="Open the Little familiar memory letter" data-memory="little-familiar">
                 <img src="pic 600.jpg" alt="A close-up of a black cat" />
                 <figcaption>Little familiar</figcaption>
             </figure>
@@ -72,6 +72,23 @@
             </figure>
         </div>
     </div>
+
+    <dialog id="memory-modal" class="memory-modal" aria-labelledby="memory-title">
+        <button type="button" id="memory-close" class="memory-close" aria-label="Close memory letter">×</button>
+        <p class="memory-eyebrow">A letter from me</p>
+        <h2 id="memory-title"></h2>
+        <form id="memory-password-form" hidden>
+            <label for="memory-password">Enter the date to open it.</label>
+            <input id="memory-password" type="password" autocomplete="off" placeholder="Enter the date" />
+            <button type="submit" class="memory-action">Open letter</button>
+            <p id="memory-password-error" role="status" hidden>That date did not unlock the letter. Try again.</p>
+        </form>
+        <article id="memory-letter" hidden>
+            <p id="memory-message"></p>
+        </article>
+        <button type="button" id="memory-close-footer" class="memory-action memory-close-footer">Close letter</button>
+    </dialog>
+    <audio id="memory-audio" src="miharu audio.mp3" preload="auto" loop></audio>
 
     <div class="window-card">
         <header>

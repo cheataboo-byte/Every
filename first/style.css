@@ -188,6 +188,145 @@ body::after {
     }
 }
 
+.memory-trigger {
+    pointer-events: auto;
+    cursor: none;
+    transition: box-shadow 160ms ease, filter 160ms ease;
+}
+
+.memory-trigger:hover {
+    box-shadow: 6px 8px 0 var(--border-line);
+    filter: brightness(1.03);
+}
+
+.memory-trigger:focus-visible {
+    outline: 4px solid var(--pastel-pink);
+    outline-offset: 4px;
+}
+
+.memory-trigger figcaption::after {
+    content: ' \2709';
+}
+
+.memory-modal {
+    position: fixed;
+    width: min(660px, calc(100vw - 32px));
+    max-width: none;
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+    box-sizing: border-box;
+    margin: auto;
+    padding: 38px 36px 28px;
+    color: #4c3922;
+    background-color: #fff1ad;
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(152, 118, 52, 0.1) 32px);
+    border: 3px solid #6f5630;
+    border-radius: 12px 12px 18px 12px;
+    box-shadow: 9px 10px 0 rgba(43, 35, 29, 0.35);
+}
+
+.memory-modal::backdrop {
+    background: rgba(41, 31, 31, 0.68);
+    backdrop-filter: blur(3px);
+}
+
+.memory-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    color: #4c3922;
+    background: transparent;
+    border: 0;
+    font: 32px/1 'Fredoka', sans-serif;
+    cursor: pointer;
+}
+
+.memory-eyebrow {
+    margin: 0 46px 8px 0;
+    color: #85642d;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+#memory-title {
+    margin: 0 42px 22px 0;
+    color: #4c3922;
+    font-size: 1.7rem;
+}
+
+#memory-letter p {
+    margin: 0;
+    font: 1.05rem/1.85 Georgia, 'Times New Roman', serif;
+    white-space: pre-line;
+}
+
+#memory-password-form label {
+    display: block;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+#memory-password {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 13px;
+    border: 2px solid #85642d;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.72);
+    color: #4c3922;
+    font: inherit;
+}
+
+.memory-action {
+    margin-top: 14px;
+    padding: 9px 16px;
+    border: 2px solid #6f5630;
+    border-radius: 8px;
+    background: #f5d875;
+    color: #4c3922;
+    font: 700 0.95rem 'Fredoka', sans-serif;
+    cursor: pointer;
+}
+
+.memory-action:hover {
+    background: #f8e394;
+}
+
+#memory-password-error {
+    margin: 12px 0 0;
+    color: #9b302f;
+    font-weight: 700;
+}
+
+.memory-close-footer {
+    display: block;
+    margin-left: auto;
+}
+
+#memory-password-form[hidden],
+#memory-letter[hidden],
+#memory-password-error[hidden] {
+    display: none;
+}
+
+@media (max-width: 520px) {
+    .memory-modal {
+        padding: 34px 22px 22px;
+    }
+
+    #memory-title {
+        font-size: 1.45rem;
+    }
+
+    #memory-letter p {
+        font-size: 1rem;
+    }
+}
+
 /* --- 2. THE CUSTOM LAUFEY MOUSE POINTER --- */
 #laufey-cursor-container {
     width: 52px;

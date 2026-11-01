@@ -85,8 +85,10 @@ const volumeSliderElement = document.getElementById('player-volume');
 const timeDisplayElement = document.getElementById('time-display');
 const repeatButtonElement = document.getElementById('btn-repeat');
 const audioPlayer = new Audio();
+const memoryAudioElement = document.getElementById('memory-audio');
 
 audioPlayer.volume = 0.7;
+if (memoryAudioElement) memoryAudioElement.volume = audioPlayer.volume;
 if (volumeSliderElement) {
     volumeSliderElement.value = String(audioPlayer.volume);
 }
@@ -227,6 +229,7 @@ if (volumeSliderElement) {
     volumeSliderElement.addEventListener('input', (event) => {
         const value = Number(event.target.value);
         audioPlayer.volume = value;
+        if (memoryAudioElement) memoryAudioElement.volume = value;
     });
 }
 
@@ -261,6 +264,124 @@ audioPlayer.addEventListener('ended', () => {
     }
 
     loadTrack(nextIndex, true);
+});
+
+const memoryLetters = {
+    'birthday-cutie': {
+        title: 'Birthday cutie',
+        message: 'Looking back at this, I still think about the school community trip in 8th grade where everything started. I clicked with you instantly, and discovering you was a chapter of my life I genuinely cherished. For a long time, we built beautiful, irreplaceable memories in those early days, and no matter what changed later, the sincerity of that friendship was 100% real. I keep this photo here because it represents the version of us that made me glad we crossed paths.'
+    },
+    'game-night': {
+        title: 'Game night',
+        message: 'That day when you told me Rainsey had turned his back at me, meant more to me than I think you ever fully understood. When Rainsey betrayed my trust after all those years, I was completely broken down. But when you stepped up and rawly told me the truth, In that exact moment, I truly believed you were a keeper. You showed up for me when I felt completely discarded by someone else, and the fact that i could have never known and lived with a liar. That loyalty is something I will never forget or take for granted, regardless of where we stand now.'
+    },
+    'silly-moments': {
+        title: 'Silly moments',
+        requiresPassword: true,
+        message: 'If you are reading this, you figured out the code. I wanted to use this space to finally say the things I couldn\'t say while I was busy trying to survive my own head. The truth is, I loved you deeply—but I loved you sincerely as my person and companion. I think you fell in love with a mask: the pretty, confident, perfect version of me that everyone else sees from the outside. But real love means seeing the critical, realistic, and unpolished parts underneath. I spent 20 hours coding this entire website for you because the friend you were to me mattered. Even if you chose to walk away from the group chat and from our friendship after the label was gone, I wanted to finish this to honor the person I thought you were. Take care of yourself, and grow into the person I always knew you had the potential to be.\n\nP.S Don\'t treat the next girl like how you treated me, maybe she could tolerate it. But for the best, I suggest you become the absolute perfect and best person for whoever this new girl could be'
+    },
+    'cutest-ever': {
+        title: 'Cutest ever',
+        message: 'I know you spend so much of your time wrapped up in romance anime, looking for those perfect, scripted storylines. But real life isn\'t an anime, Piseth. It\'s messy, it\'s serious, and sometimes it\'s full of heavy, complex things that make us uncomfortable. My situations are indeed hard for you to relate, but seeing you associate with the people that ruined my teenage years do sting sometimes. Sometimes, it showed me how hard it is for you to look past the surface. I never fit into the easy, perfect box you wanted me to be in, because I am a real person with my own battles to fight. Idk how to save this connection when I\'m so hyperfixated if I\'m gonna go stupid and crazy after i hit my head. It was a very interesting week Piseth. I thought you were trying to kill me on purpose, or were you? Lmfao'
+    },
+    'little-familiar': {
+        title: 'Little familiar',
+        message: 'The night, My head was pounding, my knee was scraped up, and we had just closed the door on our relationship. But then, the most unbelievable thing happened! Xiaomi came back! With a interesting looking ear...and three legs only. Idk what happened to the other one. Bro has been living on the roofs of houses that are at the streets wayyyy behind us. He was fed by a christian couple who owned a little churche back there and they didnt let him out. Yes Xiaomi, who had been missing for months, suddenly walked back through the door. While you were leaving the group chat and cutting ties, Xiaomi came back and It felt like a quiet apology from the universe for everything I had been put through this past week. It reminded me that even when things fall apart, the things that truly belong in my life will always find their way back.'
+    }
+};
+
+const memoryDialog = document.getElementById('memory-modal');
+const memoryTitleElement = document.getElementById('memory-title');
+const memoryPasswordForm = document.getElementById('memory-password-form');
+const memoryPasswordElement = document.getElementById('memory-password');
+const memoryPasswordError = document.getElementById('memory-password-error');
+const memoryLetterElement = document.getElementById('memory-letter');
+const memoryMessageElement = document.getElementById('memory-message');
+let resumePlaylistAfterMemory = false;
+let focusBeforeMemory = null;
+
+function openMemory(memoryId) {
+    const memory = memoryLetters[memoryId];
+    if (!memory || !memoryDialog || memoryDialog.open) return;
+
+    focusBeforeMemory = document.activeElement;
+    resumePlaylistAfterMemory = !audioPlayer.paused;
+    if (resumePlaylistAfterMemory) audioPlayer.pause();
+
+    memoryTitleElement.textContent = memory.title;
+    memoryMessageElement.textContent = memory.message;
+    memoryPasswordForm.hidden = !memory.requiresPassword;
+    memoryLetterElement.hidden = Boolean(memory.requiresPassword);
+    memoryPasswordError.hidden = true;
+    memoryPasswordElement.value = '';
+    memoryDialog.showModal();
+
+    if (memoryAudioElement) {
+        memoryAudioElement.volume = audioPlayer.volume;
+        memoryAudioElement.currentTime = 0;
+        memoryAudioElement.play().catch(() => {});
+    }
+
+    if (memory.requiresPassword) {
+        memoryPasswordElement.focus();
+    } else {
+        document.getElementById('memory-close').focus();
+    }
+}
+
+document.querySelectorAll('.memory-trigger').forEach((trigger) => {
+    trigger.addEventListener('click', () => openMemory(trigger.dataset.memory));
+    trigger.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openMemory(trigger.dataset.memory);
+        }
+    });
+});
+
+memoryPasswordForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const enteredDate = memoryPasswordElement.value.trim().toLowerCase().replace(/\s+/g, ' ');
+    const validDates = new Set([
+        '17th december 2024',
+        '17 december 2024',
+        '17/12/2024',
+        '17-12-2024',
+        '2024-12-17'
+    ]);
+
+    if (validDates.has(enteredDate)) {
+        memoryPasswordForm.hidden = true;
+        memoryPasswordError.hidden = true;
+        memoryLetterElement.hidden = false;
+        document.getElementById('memory-close-footer').focus();
+    } else {
+        memoryPasswordError.hidden = false;
+        memoryPasswordElement.focus();
+        memoryPasswordElement.select();
+    }
+});
+
+function closeMemory() {
+    if (memoryDialog.open) memoryDialog.close();
+}
+
+document.getElementById('memory-close').addEventListener('click', closeMemory);
+document.getElementById('memory-close-footer').addEventListener('click', closeMemory);
+memoryDialog.addEventListener('click', (event) => {
+    if (event.target === memoryDialog) closeMemory();
+});
+memoryDialog.addEventListener('close', () => {
+    if (memoryAudioElement) {
+        memoryAudioElement.pause();
+        memoryAudioElement.currentTime = 0;
+    }
+
+    if (resumePlaylistAfterMemory) {
+        audioPlayer.play().catch(() => {});
+    }
+
+    if (focusBeforeMemory instanceof HTMLElement) focusBeforeMemory.focus();
 });
 
 /* ==========================================================================
