@@ -315,6 +315,7 @@ function openMemory(memoryId) {
     memoryPasswordError.hidden = true;
     memoryPasswordElement.value = '';
     memoryDialog.showModal();
+    if (customCursor) memoryDialog.append(customCursor);
 
     if (memoryAudioElement) {
         memoryAudioElement.volume = audioPlayer.volume;
@@ -372,6 +373,8 @@ memoryDialog.addEventListener('click', (event) => {
     if (event.target === memoryDialog) closeMemory();
 });
 memoryDialog.addEventListener('close', () => {
+    if (customCursor) document.body.prepend(customCursor);
+
     if (memoryAudioElement) {
         memoryAudioElement.pause();
         memoryAudioElement.currentTime = 0;
