@@ -290,7 +290,7 @@ You said you were "miserable" throughout the relationship, but how could you be 
 
 I spent over 20 hours coding this entire site for Dec because the friend you were to me mattered. I wanted to finish the last bits of this project to honor the person I thought you were. Take care of yourself, and grow into the person you have always had the potential to be.
 
-P.S. I think you couldn't match my freak. I have a feeling I'm a bit bipolar there, autistic here, ADHD there and maybe a teeny bit neurodivergent. Just walkin around undiagnosed, like literally. LMFAO`
+P.S. I think you couldn't match my freak. I have a feeling I'm a bit bipolar there, autistic here, ADHD there and maybe a teeny bit neurodivergent. Just walkin around undiagnosed, like literally. LMFAOO`
     },
     'cutest-ever': {
         title: 'Cutest ever',
