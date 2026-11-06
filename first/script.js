@@ -278,7 +278,19 @@ const memoryLetters = {
     'silly-moments': {
         title: 'Silly moments',
         requiresPassword: true,
-        message: 'If you are reading this, you figured out the code. I wanted to use this space to finally say the things I couldn\'t say while I was busy trying to survive my own head. The truth is, I loved you deeply—but I loved you sincerely as my person and companion. I think you fell in love with a mask: the pretty, confident, perfect version of me that everyone else sees from the outside. But real love means seeing the critical, realistic, and unpolished parts underneath. I spent 20 hours coding this entire website for you because the friend you were to me mattered. Even if you chose to walk away from the group chat and from our friendship after the label was gone, I wanted to finish this to honor the person I thought you were. Take care of yourself, and grow into the person I always knew you had the potential to be.\n\nP.S Don\'t treat the next girl like how you treated me, maybe she could tolerate it. But for the best, I suggest you become the absolute perfect and best person for whoever this new girl could be'
+        message: `If you are reading this, you figured out the code.
+
+I wanted to use this space to finally say the things I couldn't say while I was busy trying to survive my own head. The truth is, I loved you deeply—but I loved you sincerely as my person and companion.
+
+Bro jumped straight into a romantic confession 1 year into our friendship, before you ever took the time to actually understand who I truly was. You chased this romance fantasy instead of building a solid platonic base.
+
+I was supposed to tell you everything I had in mind, including that I felt ready to be comfortable with affectionate physical touch, like hugs, on that Sichuan malatang day. But with a triple combo of a classic Victorian child (period, cold and bedridden, injuries), I'm afraid that wasn't going to happen.
+
+You said you were "miserable" throughout the relationship, but how could you be miserable in a relationship that was literally just our normal friendship with a label on top? I cannot be feeding your ego, fulfilling your romantic tropes, or come off as "perfect" once you become someone I fw. Bro literally discarded the entire bond. If you had actually loved me as a friend, you would have had the maturity to hear me out when things got uncomfortable. Instead, you proved you just saw me as a romantic object, something to drop the second it stopped matching your expectations. I loved you sincerely as a best friend; you seemed to have just wanted an idea. Like wth man.
+
+I spent over 20 hours coding this entire site for Dec because the friend you were to me mattered. I wanted to finish the last bits of this project to honor the person I thought you were. Take care of yourself, and grow into the person you have always had the potential to be.
+
+P.S. I think you couldn't match my freak. I have a feeling I'm a bit bipolar there, autistic here, ADHD there and maybe a teeny bit neurodivergent. Just walkin around undiagnosed, like literally. LMFAO`
     },
     'cutest-ever': {
         title: 'Cutest ever',
